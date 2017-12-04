@@ -1,4 +1,4 @@
-const Subjects= [["A1","A2","A3"],["B1","B2","B3"]];
+const Subjects= ["珈琲","紅茶","コーラ"];
 
 export default Subjects 
 

@@ -11,18 +11,16 @@ import Subjects from 'util/Subjects'
 import EvaluationAxis from 'util/EvaluationAxis'
 import Button from './dnd/Button'
 
-
-const SUBJECT_LENGTH = 3
 let array     = new Array();
 let data      = new Array();
-let dragCardCall = 0;
-const length  = SUBJECT_LENGTH
+const length  = Subjects.length 
 let pageCounter= 0
 const isMobile= navigator.userAgent.match(/(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i) !== null
-const boxText =[
-  "Aグループのボタンについて獲得点数に与えた影響が大きい順に並び替えてください。",
-  "Bグループのボタンについて獲得点数に与えた影響が大きい順に並び替えてください。",
-  "Aグループ全体とBグループ全体を比較して獲得点数に与えた影響が大きい順に並び替えてください。"]
+let boxText = new Array();
+for(let i=0; i<=EvaluationAxis.length; i++){
+  boxText[i] = i != EvaluationAxis.length ? "「"+EvaluationAxis[i]+"」について評価してください。" : "評価軸を順位付けしてください。"
+}
+
 
 for(let i=0; i<length; i++){
   array[i]   = new Array();
@@ -32,8 +30,9 @@ for(let i=0; i<length; i++){
 
   data[i] = new Array();
   data[i][0] = i;
-  data[i][1] = Subjects[pageCounter][i];
+  data[i][1] = Subjects[i];
 }
+JSON.parse(JSON.stringify(array))
 
 
 class App extends Component {
@@ -66,29 +65,9 @@ class App extends Component {
   next(dataarray){
     pageCounter++
     const { dataBarn } = this.props
-    if(pageCounter == EvaluationAxis.length){
-      dataBarn(dataarray)
-      array  = new Array();
-      data   = new Array();
-
-      for(let i=0; i<EvaluationAxis.length; i++){
-        array[i]   = new Array();
-        array[i][0]=-1;
-        array[i][1]="";
-        array[i][2]= i+100;
-
-        data[i]    = new Array();
-        data[i][0] = i;
-        data[i][1] = EvaluationAxis[i];
-      }
-      console.log("array:%s",JSON.stringify(array))
-      this.setState({array, data})
-    }
-
-    else if(pageCounter == EvaluationAxis.length + 1){
+    if(pageCounter == EvaluationAxis.length + 1){
       dataBarn(dataarray)
     }
-
     else {
       dataBarn(dataarray)
       data = new Array()
@@ -99,7 +78,7 @@ class App extends Component {
 
         data[i] = new Array()
         data[i][0] = i;
-        data[i][1] = Subjects[pageCounter][i];
+        data[i][1] = pageCounter != EvaluationAxis.length ? Subjects[i] : EvaluationAxis[i];
       }
       console.log("array:%s",JSON.stringify(array))
       this.setState({array,data})
@@ -108,7 +87,7 @@ class App extends Component {
   render() {
     return (
         <Card style={{overflow: 'hidden'}}>
-            <CardTitle title="ボルダルール実験" subtitle="並び替え評価" />
+            <CardTitle title="ボルダルール実験"/>
             <p style={{marginLeft: '10%'}}>{boxText[pageCounter]}</p>
             <div style={{float:'left', marginLeft: '10%'}}>
               <Card>
@@ -127,7 +106,7 @@ class App extends Component {
               <Button next={this.next} array={array} data={data.length}/>
             </div>
             <div style={{ float: 'right', marginRight: '10%'}}>
-              <Card>
+              <Card> 
                 {data.map((card, i) => {
                   return (
                     <FirstCard

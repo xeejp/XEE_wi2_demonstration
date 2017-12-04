@@ -18,7 +18,7 @@ let DnDResult = new Array()
 let arrayResult    = new Array()
 let Num = 0
 let ResultCounter = 0
-const SUBJECT_LENGTH = 3
+const SUBJECT_LENGTH = Subjects.length
 
 class Experiment extends Component {
   constructor(props) {
@@ -35,17 +35,9 @@ class Experiment extends Component {
     }
     if(Num == EvaluationAxis.length){
       for(let i=0; i<=EvaluationAxis.length; i++){
-        if(i < EvaluationAxis.length){
-          for(let d=0; d<SUBJECT_LENGTH; d++){
-            arrayResult[ResultCounter] = DnDResult[i][d][1]
-            ResultCounter++
-          }
-        }
-        if(i == EvaluationAxis.length){
-          for(let l=0; l<EvaluationAxis.length; l++){
-            arrayResult[ResultCounter] = DnDResult[i][l][1]
-            ResultCounter++
-          }
+        for(let d=0; d<SUBJECT_LENGTH; d++){
+          arrayResult[ResultCounter] = DnDResult[i][d][1]
+          ResultCounter++
         }
       }
     }

@@ -17,7 +17,7 @@ class Box extends Component{
         <div style={{...style }}>
           <Card style={{marginBottom: '.5rem', backgroundColor: '#C5CAE9'}}>
             <CardHeader
-              title="この下にドロップして並び替えてください"
+              title="drop here & sort !"
             />
           </Card>
           {this.props.children}

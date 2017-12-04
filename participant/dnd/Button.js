@@ -19,11 +19,6 @@ class Button extends Component{
     const { next, array, data} = this.props;
     return (
       <div>
-        <FlatButton 
-          label="戻る"
-          disabled={true} 
-          style={{...style}}
-        />
         <RaisedButton  
           label="次へ"
           onClick={next.bind(this,array)} 
