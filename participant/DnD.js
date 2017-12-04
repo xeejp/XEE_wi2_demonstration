@@ -88,7 +88,7 @@ class App extends Component {
     return (
         <Card style={{overflow: 'hidden'}}>
             <CardTitle title="ボルダルール実験"/>
-            <p style={{marginLeft: '10%'}}>{boxText[pageCounter]}</p>
+            <p style={{marginLeft: '3%'}}>{boxText[pageCounter]}</p>
             <div style={{float:'left', marginLeft: '10%'}}>
               <Card>
                 <Box pageCounter={pageCounter}>
@@ -105,20 +105,20 @@ class App extends Component {
               </Card>
               <Button next={this.next} array={array} data={data.length}/>
             </div>
-            <div style={{ float: 'right', marginRight: '10%'}}>
-              <Card> 
-                {data.map((card, i) => {
-                  return (
-                    <FirstCard
-                      key={card[0]}
-                      index={i}
-                      id={card[0]}
-                      text={card[1]}
-                      pageCounter={pageCounter}
-                    />
-                  );
-                })}
-              </Card>
+            <div style={{ float: 'right', marginRight: '3%' ,width: '130px'}}>
+              <div style={{padding: '15px', marginBottom: '.5rem',}}>
+              </div>
+              {data.map((card, i) => {
+                return (
+                  <FirstCard
+                    key={card[0]}
+                    index={i}
+                    id={card[0]}
+                    text={card[1]}
+                    pageCounter={pageCounter}
+                  />
+                );
+              })}
             </div>
         </Card>
     );

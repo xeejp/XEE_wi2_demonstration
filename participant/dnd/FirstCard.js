@@ -6,8 +6,8 @@ import { DragSource } from 'react-dnd'
 import EvaluationAxis from 'util/EvaluationAxis'
 
 const style = {
-  padding: '0.5rem 1rem',
-  margin: '0.5rem',
+  marginBottom: '.5rem',
+  textAlign:'left',
 }
 
 const mapStateToProps = ()=> {
@@ -40,9 +40,9 @@ class FirstCard extends Component{
       connectDragSource(
         <div style={{ ...style, opacity }}>
           <Card>
-            <CardHeader
-              title={text}
-            />
+            <div style={{padding: '20px',}}>
+              {text}
+            </div>
           </Card>
         </div>
       )

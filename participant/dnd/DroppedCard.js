@@ -10,8 +10,7 @@ const mapStateToProps = ()=> {
 }
 
 const cardStyle = {
-  padding: '0.5rem 1rem',
-  marginBottom: '.2rem',
+  marginBottom: '.5rem',
   textAlign:'left',
 }
 const style = {
@@ -96,9 +95,9 @@ class DroppedCard extends Component{
       return connectDragSource(connectDropTarget(
         <div style={{ ...cardStyle ,opacity}}>
           <Card>
-            <CardHeader
-              title={title}
-            />
+            <div style={{padding: '20px',}}>
+              {title}
+          </div>
           </Card>
         </div>
       ));

@@ -58,18 +58,16 @@ class Experiment extends Component {
     const Text = question_text[sequence]
     return (sequence != "answered")?
       <div>
-        <Card>
-          {Num <= EvaluationAxis.length ?
-            <DnD 
-              Num = {Num}
-              dataBarn= {this.dataBarn}
-            />
-            :<EndQuestion 
-              arrayResult={arrayResult}
-              manyTypeData = {manyTypeData}
-            />
-          }
-        </Card>
+        {Num <= EvaluationAxis.length ?
+          <DnD 
+            Num = {Num}
+            dataBarn= {this.dataBarn}
+          />
+          :<EndQuestion 
+            arrayResult={arrayResult}
+            manyTypeData = {manyTypeData}
+          />
+        }
       </div>
     : <Card><CardText>{Text.text.split('\n').map( line => <p>{line}</p>)}</CardText></Card>
   }
