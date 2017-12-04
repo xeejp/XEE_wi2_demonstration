@@ -25,5 +25,13 @@ module.exports = {
     modulesDirectories: [
       "node_modules", "./"
     ]
-  }
+  },
+  plugins: [
+    function () {
+      this.plugin('watch-run', (watching, callback) => {
+        console.log('\033[36m' + 'Begin compile at ' + new Date() + ' \033[39m')
+        callback()
+      })
+    }
+  ]
 };
