@@ -6,6 +6,8 @@ import CircularProgress from 'material-ui/CircularProgress'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
+import Slider from 'material-ui/Slider'
+
 import {
   Table,
   TableBody,
@@ -21,39 +23,29 @@ import Calculation from './Calculation'
 const mapStateToProps = ({}) => ({
 })
 
-let isnan = false
 let endQ = true
-let q1=0
-let q2=0
+let isNotAns1=true
+let isNotAns2=true
 
 class EndQuestion extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      sliderValue1:1,
+      sliderValue2:1,
     }
-    console.log("q1="+q1)
-    console.log("q2="+q2)
   }
 
-  handleChange1(event) {
-    const { arrayResult } = this.props
-    const value1 = event.target.value
-    isnan=isNaN(value1)
-    q1=value1
-    console.log("q1="+q1)
-    console.log("q2="+q2)
-    console.log("arrayResult="+JSON.stringify(arrayResult))
-    
-    this.setState({ value1 })
+  handleSlider1 = (event, value) => {
+    console.log("slider1: "+value)
+    isNotAns1=false
+    this.setState({sliderValue1: value})
   }
 
-  handleChange2(event) {
-    const value2 = event.target.value
-    isnan=isNaN(value2)
-    q2=value2
-    this.setState({ value2 })
-    console.log("q1="+q1)
-    console.log("q2="+q2)
+  handleSlider2 = (event, value) => {
+    console.log("slider2: "+value)
+    isNotAns2=false
+    this.setState({sliderValue2: value})
   }
 
   handleClick(){
@@ -67,38 +59,60 @@ class EndQuestion extends Component {
   render() {
     const { value } = this.state
     const { arrayResult } = this.props
-    const comparisonAxis = [q1,q2,1]
+    const comparisonAxis = [this.state.sliderValue1, this.state.sliderValue2,1]
 
     if(endQ){
       return (
         <Card>
           <CardTitle title="ボルダルール実験" subtitle="AグループはBグループの何倍？" />
           <CardText>
-            <p>{arrayResult[9]}は{arrayResult[10]}の何倍くらい重要ですか？</p>
-            <p>何倍重要かを数字でお答えください</p>
-            <TextField
-              hintText=""
-              value={value}
-              onChange={this.handleChange1.bind(this)}
-              floatingLabelText="数値を入力してください"
-            /><br /><br /><br />
-            <p>{arrayResult[10]}は{arrayResult[11]}の何倍くらい重要ですか？</p>
-            <p>何倍重要かを数字でお答えください</p>
-            <TextField
-              hintText=""
-              value={value}
-              onChange={this.handleChange2.bind(this)}
-              floatingLabelText="数値を入力してください"
-            /><br /><br /><br />
-            <RaisedButton
-              label="回答" 
-              style={{marginLeft: '3%'}}
-              primary={true} 
-              onClick={this.handleClick.bind(this)} 
-              disabled={isnan || value == 0 || value > 100}
+            <p>{arrayResult[11]}の重要度を基準値1としたら、他の評価軸はどれくらい重要ですか？</p>
+            <p>{arrayResult[9]} : {this.state.sliderValue1}</p>
+            <Slider
+              style={{marginLeft:"10%", marginRight:"10%"}}
+              min={1}
+              max={5}
+              step={1}
+              onChange={this.handleSlider1}
             />
-          </CardText>
-        </Card>
+
+          <p>{arrayResult[10]} : {this.state.sliderValue2}</p>
+          <Slider
+            style={{marginLeft:"10%", marginRight:"10%"}}
+            min={1}
+            max={5}
+            step={1}
+            onChange={this.handleSlider2}
+          />
+          <br /><br /><br />
+          <RaisedButton
+            label="回答" 
+            style={{marginLeft: '3%'}}
+            primary={true} 
+            onClick={this.handleClick.bind(this)} 
+            disabled={
+              this.state.sliderValue1 == 1 ||
+              this.state.sliderValue2 == 1 ||
+              this.state.sliderValue1 < this.state.sliderValue2 ||
+              this.state.sliderValue1  == this.state.sliderValue2
+            }
+          />
+        <p>{
+          isNotAns1 || isNotAns2 ? null :
+            this.state.sliderValue1 < this.state.sliderValue2 ||
+            this.state.sliderValue1  == this.state.sliderValue2 
+        ?
+          arrayResult[9]+"は"+arrayResult[10]+"より大きな値に設定してください"
+          :null}
+        </p>
+        <p>{isNotAns1 || isNotAns2 ? null :
+          this.state.sliderValue1 == 1 || this.state.sliderValue2  == 1
+          ?
+          "各値は1以上に設定してください"
+          :null}
+        </p>
+      </CardText>
+    </Card>
       )
     }
     else{
