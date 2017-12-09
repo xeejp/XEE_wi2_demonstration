@@ -11,9 +11,11 @@ const mapStateToProps = ({ question_text }) => ({
 
 const Description = ({ question_text }) => (
   <Card>
-    <CardTitle title={ReadJSON().static_text["title"]} subtitle={ReadJSON().static_text["description"]} />
+    <CardTitle title="好きな飲み物アンケート" subtitle={ReadJSON().static_text["description"]} />
     <CardText>
-      {question_text['description_text'].split('\n').map( line => <p>{line}</p>)}
+      <p>紅茶、コーラ、珈琲の中で好きな飲み物は何ですか？</p>
+      <p>「味」「価格」「手軽さ」の観点から考えてみてください。</p>
+      <p>また、これらの評価軸の中で重視したい項目は何ですか？</p>
     </CardText>
   </Card>
 )

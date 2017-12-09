@@ -12,7 +12,7 @@ const mapStateToProps = ({ joined, question_text }) => ({
 
 const Waiting = ({ joined, question_text }) => (
 	<Card>
-		<CardTitle title={ReadJSON().static_text["title"]} subtitle={ReadJSON().static_text["waiting"]} />
+		<CardTitle title="好きな飲み物アンケート" subtitle={ReadJSON().static_text["waiting"]} />
 		<CardText>
 			{question_text['waiting_text'].split('\n').map( line => <p>{line}</p>)}
 			<p>{ReadJSON().static_text["joined"][0] + joined + ReadJSON().static_text["joined"][1]} </p>

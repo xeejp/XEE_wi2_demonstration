@@ -87,7 +87,7 @@ class App extends Component {
   render() {
     return (
         <Card style={{overflow: 'hidden'}}>
-            <CardTitle title="ボルダルール実験"/>
+            <CardTitle title="好きな飲み物アンケート" subtitle="質問画面" />
             <p style={{marginLeft: '3%'}}>{boxText[pageCounter]}</p>
             <div style={{float:'left', marginLeft: '10%'}}>
               <Card>

@@ -92,10 +92,10 @@ class Calculation extends Component {
     console.log(JSON.stringify(calculationsResult))
     return (
       <Card>
-        <CardTitle title="ボルダルール実験" subtitle="質問終了画面" />
+        <CardTitle title="好きな飲み物アンケート" subtitle="結果画面" />
         <CardText>
-          <p>これで質問を終了します。</p>
-          <p>しばらくお待ちください。</p>
+          <p>これでアンケートを終了します。</p>
+          <p>集計結果を表に示します。</p>
         </CardText>
 
         <Table>

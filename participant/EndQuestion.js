@@ -64,7 +64,7 @@ class EndQuestion extends Component {
     if(endQ){
       return (
         <Card>
-          <CardTitle title="ボルダルール実験" subtitle="AグループはBグループの何倍？" />
+          <CardTitle title="好きな飲み物アンケート" subtitle="質問画面" />
           <CardText>
             <p>{arrayResult[11]}の重要度を基準値1としたら、他の評価軸はどれくらい重要ですか？</p>
             <p>{arrayResult[9]} : {this.state.sliderValue1}</p>
